@@ -16,7 +16,7 @@ function Application() {
             <Router>
                 <Route path='/' exact component={Homepage}/>
                 <Route path='/users/:page' exact component={Users}/>
-                <Route path='/users/:page/:id' exact component={UserStatistic} />
+                <Route path='/users/:page/user/:id' exact component={UserStatistic} />
             </Router>
 
         </div>

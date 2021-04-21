@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchUsersRequest} from "../redux/actions/fetch-users-actions";
 import {resultsToDisplay, limit} from "./utils";
 import Pages from "./pagination";
+import NavBar from "./nav-bar";
 
 const Users = () => {
     const state = useSelector(state => state);
@@ -17,6 +18,7 @@ const Users = () => {
     }, [page]);
 
     return <div id='homepage'>
+        <NavBar />
         <h1>USERS</h1>
         <table>
             <thead>

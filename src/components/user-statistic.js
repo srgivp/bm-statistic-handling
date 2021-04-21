@@ -9,6 +9,7 @@ import {useForm, Controller} from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "@material-ui/core/Button";
+import NavBar from "./nav-bar";
 
 const UserStatistic = () => {
     const state = useSelector(state => state);
@@ -31,6 +32,7 @@ const UserStatistic = () => {
     }, []);
 
     return <div id='homepage'>
+        <NavBar />
         <h1>STATISTIC</h1>
         <form id='user-form' onSubmit={handleSubmit((() => {
 

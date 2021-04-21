@@ -13,21 +13,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export function PaginationRounded() {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <Pagination count={10} shape="rounded" />
-            <Pagination count={10} variant="outlined" shape="rounded" />
-        </div>
-    );
-}
+// export function PaginationRounded() {
+//     const classes = useStyles();
+//
+//     return (
+//         <div className={classes.root}>
+//             <Pagination count={10} shape="rounded" />
+//             <Pagination count={10} variant="outlined" shape="rounded" />
+//         </div>
+//     );
+// }
 
 const Pages = () => {
     const state = useSelector(state => state);
     let history = useHistory();
-    // Pagination.renderItem(linksGenerator(state.users.total).map(item => <PaginationItem {...item} />))
     const {total} = state.users;
     const pagesQuantity = total % limit ? total / limit + 1 : total / limit;
     return <div id='pagination'>

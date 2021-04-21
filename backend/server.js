@@ -64,7 +64,7 @@ app.get('/users/:page', (req, res) => {
     })
 })
 
-app.get('/users/:page/:id', (req, res) => {
+app.get('/users/:page/user/:id', (req, res) => {
     const startDate = `'${req.query.from}'`;
     const finishDate = `'${req.query.to}'`;
     const userId = req.params.id;
