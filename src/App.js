@@ -4,7 +4,7 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import './App.css';
+import './App.scss';
 import Homepage from "./components/homepage";
 import Users from "./components/users";
 import UserStatistic from "./components/user-statistic";

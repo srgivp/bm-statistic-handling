@@ -31,7 +31,7 @@ const UserStatistic = () => {
         dispatch(fetchDetailsRequest({id, page, from: minDate, to: toInitial}));
     }, []);
 
-    return <div id='homepage'>
+    return <div id='details'>
         <NavBar />
         <h1>STATISTIC</h1>
         <form id='user-form' onSubmit={handleSubmit((() => {

@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100vw;
+}
+
+#center-axis-container > div:nth-child(2) {
+  z-index: 0 !important;
+}

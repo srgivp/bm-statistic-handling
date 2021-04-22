@@ -17,7 +17,7 @@ const Users = () => {
         dispatch(fetchUsersRequest({limit, page: page-1}));
     }, [page]);
 
-    return <div id='homepage'>
+    return <div id='users'>
         <NavBar />
         <h1>USERS</h1>
         <table>

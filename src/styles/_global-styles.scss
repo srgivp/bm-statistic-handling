@@ -1,0 +1,15 @@
+%flex {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+%flex-centered-vertically {
+  @extend %flex;
+  align-items: center;
+}
+
+%flex-centered-horizontally {
+  @extend %flex;
+  justify-content: center;
+}
