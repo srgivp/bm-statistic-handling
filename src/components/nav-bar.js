@@ -18,7 +18,6 @@ const NavBar = () => {
     const userName = (id) => {
         if (id) {
             const user = state.users.data.filter(item =>item.id === Number(id))
-            console.log('user: ', user);
             return `${user[0].first_name} ${user[0].last_name}`;
         } else {
             return null;
@@ -30,7 +29,7 @@ const NavBar = () => {
         [`/users/${page}/user/${id}`]: [`${userName(id)}`],
     }
 
-    return <div id='nav-bar' className='flex-container space-between-container'>
+    return <div id='nav-bar' className='flex-container'>
         <div id='breadcrumbs-container'>
             <Route>
                 {({ location }) => {

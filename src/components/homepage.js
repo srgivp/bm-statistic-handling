@@ -65,7 +65,8 @@ const Homepage = () => {
             <div className='flex-container'>
                 <div>AppCo</div>
                 <div>All rights reserved by ThemeTags</div>
-                <div>Copyrights © 2019. </div></div>
+                <div>Copyrights © 2019. </div>
+            </div>
         </footer>
     </div>
 }

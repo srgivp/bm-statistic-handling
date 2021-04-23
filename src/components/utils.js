@@ -7,7 +7,7 @@ export const resultsToDisplay = (state, location, history) => {
             <td>{item.id}</td>
             <td>{item.first_name}</td>
             <td>{item.last_name}</td>
-            <td>{item.mail}</td>
+            <td>{item.email}</td>
             <td>{item.gender}</td>
             <td>{item.ip_address}</td>
             <td>{item.total_clicks}</td>

@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import "../../styles/global-styles";
+
+@mixin respond($breakpoint) {
+  @if ($breakpoint == x-large) {
+    @media (min-width: 1250px) {
+      @content
+    }
+  }
+  @if ($breakpoint == large) {
+    @media (max-width: 1250px) {
+      @content
+    }
+  }
+  @if ($breakpoint == medium) {
+    @media (max-width: 900px) {
+      @content
+    }
+  }
+  @if ($breakpoint == small) {
+    @media (max-width: 700px) {
+      @content
+    }
+  }
+}
+
+#users {
+  $totalWidth: 1440;
+  height: fit-content;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  padding-bottom: 57px;
+  @include respond(small){
+    padding-bottom: 30px;
+  }
+  .flex-container {
+    @extend %flex-centered-vertically;
+  }
+  header {
+    height: 72px;
+    @include respond(small){
+      height: 37px;
+    }
+    background: #3A80BA;
+    color: #FFFFFF;
+    font-size: 40px;
+    @include respond(small) {
+      font-size: 20px;
+    }
+    padding-left: 130/$totalWidth*100%;
+  }
+  main {
+    margin: 16/$totalWidth*100% 130/$totalWidth*100%;
+    @include respond(small) {
+      margin: 3px;
+    }
+    overflow: scroll;
+    .MuiBreadcrumbs-li {
+      a, p {
+        font-size: 16px;
+        @include respond(small) {
+          font-size: 12px;
+        }
+      }
+    }
+    p {
+      color: #3A80BA;
+
+    }
+    > h3 {
+      margin-top: 24/$totalWidth*100%;
+      font-size: 32px;
+      @include respond(small) {
+          font-size: 16px;
+      }
+    }
+    table {
+      width: 100%;
+      border-radius: 5%;
+      text-align: center;
+      margin-top: 16/$totalWidth*100%;
+      thead {
+        > tr{
+          th {
+            height: 48px;
+            @include respond(small) {
+              height: 25px;
+            }
+            background: #3A80BA;
+            color: #FFFFFF;
+            &:first-child{
+              border-top-left-radius: 5px;
+            }
+            &:last-child {
+              border-top-right-radius: 5px;
+            }
+            h3 {
+              font-size: 16px;
+              @include respond(small) {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background: #F1F1F1;
+          }
+          &:last-child {
+            td {
+              &:first-child {
+                border-bottom-left-radius: 5px;
+              }
+              &:last-child {
+                 border-bottom-right-radius: 5px;
+               }
+            }
+          }
+          td {
+            height: 32px;
+            @include respond(small) {
+              height: 16px;
+            }
+            font-size: 16px;
+            @include respond(small) {
+              font-size: 12px;
+            }
+          }}
+      }
+
+    }
+    #pagination {
+      margin-top: 24/$totalWidth*100%;
+      width: 100%;
+      .MuiPagination-root {
+        @extend %flex-centered-horizontally;
+        button {
+          font-family: 'Montserrat', sans-serif;
+          height: 48px;
+          width: 48px;
+          font-size: 12px;
+          @include respond(small) {
+            height: 20px;
+            width: 20px;
+            font-size: 10px;
+        }
+        }
+      }
+    }
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    background: #1C3B55;
+    height: 57px;
+    @include respond(small){
+      height: 30px;
+    }
+    @extend %flex-centered-vertically;
+    .flex-container {
+      width: 100%;
+      @extend %flex-centered-vertically;
+      justify-content: space-between;
+      padding: 0 130/1440*100%;
+      @include respond(small) {
+        padding: 0 10px;
+      }
+      font-size: 16/$totalWidth*100vw;
+      @include respond(small) {
+        font-size: 8px;
+      }
+      color: #FFFFFF;
+      > div {
+        width: 33%;
+        @extend %flex-centered-vertically;
+        &:first-child{
+          font-size: 32/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 16px;
+          }
+        }
+        &:nth-child(2) {
+          justify-content: center;
+          text-align: center;
+        }
+        &:nth-child(3) {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+}
