@@ -1,6 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import "../../styles/global-styles";
 
+
+@mixin respond($breakpoint) {
+  @if ($breakpoint == x-large) {
+    @media (min-width: 1250px) {
+      @content
+    }
+  }
+  @if ($breakpoint == large) {
+    @media (max-width: 1250px) {
+      @content
+    }
+  }
+  @if ($breakpoint == medium) {
+    @media (max-width: 900px) {
+      @content
+    }
+  }
+  @if ($breakpoint == small) {
+    @media (max-width: 500px) {
+      @content
+    }
+  }
+}
+
 #homepage {
   $totalViewWidth: 100vw;
   $totalViewHeight: 100vh;
@@ -10,6 +34,22 @@
   position: relative;
   width: 100%;
   height: ($totalHeight/$totalWidth)*100vw;
+  @include respond(x-large) {
+    $totalHeight: 1503;
+    height: ($totalHeight/$totalWidth)*100vw;
+  }
+  @include respond(large) {
+    $totalHeight: 2600;
+    height: ($totalHeight/$totalWidth)*100vw;
+  }
+  @include respond(medium) {
+    $totalHeight: 2700;
+    height: ($totalHeight/$totalWidth)*100vw;
+  }
+  @include respond(small) {
+    $totalHeight: 3000;
+    height: ($totalHeight/$totalWidth)*100vw;
+  }
   @extend %flex-centered-horizontally;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
@@ -23,6 +63,22 @@
     &:first-child {
       position: relative;
       height: ($topContainerHeight/$totalHeight)*100%;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        height: ($topContainerHeight/$totalHeight)*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        height: ($topContainerHeight/$totalHeight)*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        height: ($topContainerHeight/$totalHeight)*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        height: ($topContainerHeight/$totalHeight)*100%;
+      }
       background: url(../../images/top-background.svg) top;
       background-repeat: no-repeat;
       background-size: 100%;
@@ -34,6 +90,22 @@
           position: absolute;
           width: 136/$totalWidth*100%;
           height: 49/$totalHeight*100%;
+          @include respond(x-large) {
+            $totalHeight: 1503;
+            height: 49/$totalHeight*100%;
+          }
+          @include respond(large) {
+            $totalHeight: 2600;
+            height: 49/$totalHeight*100%;
+          }
+          @include respond(medium) {
+            $totalHeight: 2700;
+            height: 49/$totalHeight*100%;
+          }
+          @include respond(small) {
+            $totalHeight: 3000;
+            height: 49/$totalHeight*100%;
+          }
           left: 130/$totalWidth*100%;
           top: 24/$topContainerHeight*100%;
           font-size: (40/$totalWidth)*100vw;
@@ -129,9 +201,39 @@
       position: absolute;
       width: 580/$totalWidth*100%;
       height: 78/$totalHeight*100%;
-      //left: 430px;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        height: 78/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        height: 78/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        height: 78/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        height: 78/$totalHeight*100%;
+      }
       top: 671/$totalHeight*100%;
-      //margin-top: 16/$totalWidth*100%;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        top: 671/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        top: 671/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        top: 671/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        top: 671/$totalHeight*100%;
+      }
       color: #1A1A1A;
       font-size: 32/$totalWidth*100vw;
       line-height: 39/$totalWidth*100vw;
@@ -143,9 +245,41 @@
     //our design
     &:nth-child(3) {
       position: absolute;
-      width: 780px;
+      width: 780/$totalWidth*100%;
       height: 56/$totalHeight*100%;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        height: 56/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        height: 56/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        height: 56/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        height: 56/$totalHeight*100%;
+      }
       top: 773/$totalHeight*100%;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        top: 773/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        top: 773/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        top: 773/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        top: 773/$totalHeight*100%;
+      }
       font-size: 20/$totalWidth*100vw;
       line-height: 28.4/$totalWidth*100vw;
       text-align: center;
@@ -157,23 +291,66 @@
     &:nth-child(4) {
       position: absolute;
       top: 869/$totalHeight*100%;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        top: 869/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        top: 869/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        top: 869/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        top: 869/$totalHeight*100%;
+      }
       width: ($totalWidth - 260)/$totalWidth*100%;
       @extend %flex;
+      @media only screen and (max-width: 1250px){
+        justify-content: center;
+      }
       justify-content: space-between;
       height: 323/$totalHeight*100%;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        height: 323/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        height: 323/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        height: 323/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        height: 323/$totalHeight*100%;
+      }
       .product {
         position: relative;
         width: 380/($totalWidth - 260)*100%;
         height: 100%;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
         border-radius: 32px;
-        //@extend %flex-centered-horizontally;
+        @media only screen and (max-width: 1250px){
+          width: 65%;
+          height: auto;
+          margin: 15px 0;
+          padding-bottom: 15px;
+        }
         > div {
           //img container
           &:first-child {
             width: 100%;
             @extend %flex-centered-horizontally;
             margin-top: 48/380*100%;
+            @media only screen and (max-width: 1100px){
+              margin-top: 15px;
+            }
             > img {
               width: 106/380*100%;
             }
@@ -203,6 +380,22 @@
     position: absolute;
     bottom: 0;
     height: 183.6/$totalHeight*100%;
+    @include respond(x-large) {
+      $totalHeight: 1503;
+      height: 183.6/$totalHeight*100%;
+    }
+    @include respond(large) {
+      $totalHeight: 2600;
+      height: 183.6/$totalHeight*100%;
+    }
+    @include respond(medium) {
+      $totalHeight: 2700;
+      height: 183.6/$totalHeight*100%;
+    }
+    @include respond(small) {
+      $totalHeight: 3000;
+      height: 183.6/$totalHeight*100%;
+    }
     width: 100%;
     @extend %flex-centered-horizontally;
     background: url(../../images/footer.svg) bottom;
@@ -273,9 +466,3 @@
     }
   }
 }
-//@media only screen and (max-width: 1100px){
-//  #homepage{
-//    $totalHeight: 2000;
-//    $totalWidth: 1440;
-//  }
-//}
