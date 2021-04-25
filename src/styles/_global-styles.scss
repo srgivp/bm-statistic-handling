@@ -13,3 +13,26 @@
   @extend %flex;
   justify-content: center;
 }
+
+@mixin respond($breakpoint) {
+  @if ($breakpoint == x-large) {
+    @media (min-width: 1250px) {
+      @content
+    }
+  }
+  @if ($breakpoint == large) {
+    @media (max-width: 1250px) {
+      @content
+    }
+  }
+  @if ($breakpoint == medium) {
+    @media (max-width: 900px) {
+      @content
+    }
+  }
+  @if ($breakpoint == small) {
+    @media (max-width: 700px) {
+      @content
+    }
+  }
+}

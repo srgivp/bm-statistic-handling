@@ -3,7 +3,7 @@ import {
     FETCH_DETAILS_ERROR,
     FETCH_DETAILS_SUCCESS,
     CHANGE_FROM,
-    CHANGE_TO
+    CHANGE_TO, SET_NAME
 } from "./action-types";
 import {actionSamplePayload} from "./action-samples";
 
@@ -16,7 +16,6 @@ export const fetchDetailsRequest = (payload) => async (dispatch) => {
         let response = await fetch(`http://localhost:8080/users/${page}/user/${id}?from=${from}&to=${to}`);
         if (response.ok) {
             response = await response.json();
-            console.log('response: ', response);
             response.from = from;
             response.to = to;
             dispatch(fetchDetailsSuccess(response));
@@ -32,3 +31,4 @@ export const fetchDetailsRequest = (payload) => async (dispatch) => {
 
 export const changeFrom = actionSamplePayload(CHANGE_FROM);
 export const changeTo = actionSamplePayload(CHANGE_TO);
+export const setName = actionSamplePayload(SET_NAME);

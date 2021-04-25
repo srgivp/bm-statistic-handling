@@ -1,30 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import "../../styles/global-styles";
 
-
-@mixin respond($breakpoint) {
-  @if ($breakpoint == x-large) {
-    @media (min-width: 1250px) {
-      @content
-    }
-  }
-  @if ($breakpoint == large) {
-    @media (max-width: 1250px) {
-      @content
-    }
-  }
-  @if ($breakpoint == medium) {
-    @media (max-width: 900px) {
-      @content
-    }
-  }
-  @if ($breakpoint == small) {
-    @media (max-width: 500px) {
-      @content
-    }
-  }
-}
-
 #homepage {
   $totalHeight: 1503;
   $totalWidth: 1440;
@@ -106,7 +82,10 @@
           }
           left: 130/$totalWidth*100%;
           top: 24/$topContainerHeight*100%;
-          font-size: (40/$totalWidth)*100vw;
+          font-size: 40/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 20px;
+          }
           color: #FFFFFF;
         }
       }
@@ -121,6 +100,11 @@
           top: 121/$topContainerHeight*100%;
           font-size: 48/$totalWidth*100vw;
           line-height: 59/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 10px;
+            line-height: 1;
+            top: 150/$topContainerHeight*100%;;
+          }
           text-align: left;
           color: #FFFFFF;
         }
@@ -135,6 +119,9 @@
          left: 130/$totalWidth*100%;
          top: 263/$topContainerHeight*100%;
          font-size: (20/$totalWidth)*100vw;
+         @include respond(small) {
+           font-size: 8px;
+         }
          line-height: (28.4/$totalWidth)*100vw;
          color: #FFFFFF;
        }
@@ -155,6 +142,12 @@
           justify-content: center;
           align-items: center;
           font-size: 16/$totalWidth*100vw;
+          @include respond(small) {
+            top: 450/$topContainerHeight*100%;
+            width: 55px;
+            height: 20px;
+            font-size: 8px;
+          }
           &:hover {
             cursor: pointer;
             background-color: #f0eaf5;
@@ -234,6 +227,9 @@
       }
       color: #1A1A1A;
       font-size: 32/$totalWidth*100vw;
+      @include respond(small) {
+        font-size: 10px;
+      }
       line-height: 39/$totalWidth*100vw;
       text-align: center;
 
@@ -245,40 +241,28 @@
       position: absolute;
       width: 780/$totalWidth*100%;
       height: 56/$totalHeight*100%;
-      @include respond(x-large) {
-        $totalHeight: 1503;
-        height: 56/$totalHeight*100%;
-      }
-      @include respond(large) {
-        $totalHeight: 2600;
-        height: 56/$totalHeight*100%;
-      }
-      @include respond(medium) {
-        $totalHeight: 2700;
-        height: 56/$totalHeight*100%;
-      }
-      @include respond(small) {
-        $totalHeight: 3000;
-        height: 56/$totalHeight*100%;
-      }
-      top: 773/$totalHeight*100%;
-      @include respond(x-large) {
-        $totalHeight: 1503;
-        top: 773/$totalHeight*100%;
-      }
-      @include respond(large) {
-        $totalHeight: 2600;
-        top: 773/$totalHeight*100%;
-      }
-      @include respond(medium) {
-        $totalHeight: 2700;
-        top: 773/$totalHeight*100%;
-      }
-      @include respond(small) {
-        $totalHeight: 3000;
-        top: 773/$totalHeight*100%;
-      }
       font-size: 20/$totalWidth*100vw;
+      @include respond(x-large) {
+        $totalHeight: 1503;
+        height: 56/$totalHeight*100%;
+        top: 773/$totalHeight*100%;
+      }
+      @include respond(large) {
+        $totalHeight: 2600;
+        height: 56/$totalHeight*100%;
+        top: 773/$totalHeight*100%;
+      }
+      @include respond(medium) {
+        $totalHeight: 2700;
+        height: 56/$totalHeight*100%;
+        top: 773/$totalHeight*100%;
+      }
+      @include respond(small) {
+        $totalHeight: 3000;
+        height: 56/$totalHeight*100%;
+        top: 773/$totalHeight*100%;
+        font-size: 8px;
+      }
       line-height: 28.4/$totalWidth*100vw;
       text-align: center;
       color: #7E7E7E;
@@ -360,6 +344,9 @@
           margin-top: 40/380*100%;
           font-weight: 600;
           font-size: 24/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 10px;
+          }
           line-height: 29/$totalWidth*100vw;
         }
         > p {
@@ -367,6 +354,9 @@
           @extend %flex-centered-horizontally;
           margin-top: 16/380*100%;
           font-size: 16/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 7px;
+          }
           line-height: 22.72/$totalWidth*100vw;
           color: #7E7E7E;
           text-align: center;
@@ -414,6 +404,9 @@
           border-radius: 10px;
           padding-right: 176/579*100%;
           font-size: 16/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 8px;
+          }
           font-family: 'Montserrat', sans-serif;
           padding-left: 19/579*100%;
           color: #B9B9B9;
@@ -429,6 +422,9 @@
           background: #3A80BA;
           border-radius: 8px;
           font-size: 16/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 7px;
+          }
           font-family: 'Montserrat', sans-serif;
           color: #FFFFFF;
           border: none;
@@ -447,12 +443,19 @@
       width: 100%;
       padding: 0 130/1440*100%;
       font-size: 16/$totalWidth*100vw;
+      @include respond(small) {
+        font-size: 7px;
+        line-height: 1;
+      }
       color: #FFFFFF;
       > div {
         width: 33%;
         @extend %flex-centered-vertically;
         &:first-child{
           font-size: 32/$totalWidth*100vw;
+          @include respond(small) {
+            font-size: 16px;
+          }
         }
         &:nth-child(2) {
           justify-content: center;

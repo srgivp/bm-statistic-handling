@@ -6,6 +6,7 @@ import {resultsToDisplay, limit} from "./utils";
 import Pages from "./pagination";
 import NavBar from "./nav-bar";
 import './components-styles/styles-users.scss';
+import './components-styles/common-components-styles.scss';
 
 const Users = () => {
     const state = useSelector(state => state);
@@ -15,13 +16,13 @@ const Users = () => {
     let history = useHistory();
 
     useEffect(() => {
-        dispatch(fetchUsersRequest({limit, page: page-1}));
+        dispatch(fetchUsersRequest({limit, page: page - 1}));
     }, [page]);
 
     return <div id='users' className='flex-container'>
         <header className='flex-container'>AppCo</header>
         <main>
-            <NavBar />
+            <NavBar/>
             <h3 className='flex-container'>Users statistics</h3>
             <table>
                 <thead>
@@ -56,14 +57,15 @@ const Users = () => {
                 {resultsToDisplay(state, location, history)}
                 </tbody>
             </table>
-            <Pages />
+            <Pages/>
         </main>
         <footer>
-        <div className='flex-container'>
-            <div>AppCo</div>
-            <div>All rights reserved by ThemeTags</div>
-            <div>Copyrights © 2019. </div></div>
-    </footer>
+            <div className='flex-container'>
+                <div>AppCo</div>
+                <div>All rights reserved by ThemeTags</div>
+                <div>Copyrights © 2019.</div>
+            </div>
+        </footer>
     </div>
 }
 

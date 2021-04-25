@@ -1,3 +1,10 @@
+@import './styles/_global-styles.scss';
 html {
-  font-size: 10px;
+  overflow-x: hidden;
+  @include respond(small){
+    overflow: scroll;
+  }
+  @include respond(medium){
+    overflow: scroll;
+  }
 }

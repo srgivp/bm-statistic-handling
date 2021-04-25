@@ -10,7 +10,6 @@ export const fetchUsersRequest = (payload) => async (dispatch) => {
         let response = await fetch(`http://localhost:8080/users/${page}?limit=${limit}`);
         if (response.ok) {
             response = await response.json();
-            console.log('response: ', response);
             dispatch(fetchUsersSuccess(response));
         } else {
             response = response.json();

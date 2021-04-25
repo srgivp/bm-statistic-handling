@@ -7,3 +7,4 @@ export const FETCH_DETAILS_ERROR = '@details/FETCH_DETAILS_ERROR';
 export const CHANGE_FROM = '@details/CHANGE_FROM';
 export const CHANGE_TO = '@details/CHANGE_TO';
 export const CLEAN_ERROR = '@error/CLEAN_ERROR';
+export const SET_NAME = '@details/SET_NAME';

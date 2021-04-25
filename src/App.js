@@ -1,8 +1,7 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Route,
-    Redirect
+    Route
 } from "react-router-dom";
 import './App.scss';
 import Homepage from "./components/homepage";

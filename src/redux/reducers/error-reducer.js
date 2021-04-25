@@ -1,6 +1,7 @@
 import {CLEAN_ERROR} from "../actions/action-types";
+
 export const initialErrorState = {error: null};
-const errorReducer = (state = initialErrorState, action) => {
+export const errorReducer = (state = initialErrorState, action) => {
     if (action.payload && action.payload.error) {
         return {
             ...state,
@@ -12,5 +13,3 @@ const errorReducer = (state = initialErrorState, action) => {
         return state;
     }
 }
-
-export default errorReducer;

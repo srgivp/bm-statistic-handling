@@ -14,19 +14,11 @@ const NavBar = () => {
         return state;
     });
     const {page, id} = useParams();
-
-    const userName = (id) => {
-        if (id) {
-            const user = state.users.data.filter(item =>item.id === Number(id))
-            return `${user[0].first_name} ${user[0].last_name}`;
-        } else {
-            return null;
-        }
-    }
     const LinkRouter = (props) => <MuiLink {...props} component={Link} />;
+    const {first_name, last_name} = state.details;
     const breadcrumbNameMap = {
         [`/users/${page}`]: [`Users page ${page}`],
-        [`/users/${page}/user/${id}`]: [`${userName(id)}`],
+        [`/users/${page}/user/${id}`]: first_name ? [`${first_name} ${last_name}`] : null,
     }
 
     return <div id='nav-bar' className='flex-container'>
