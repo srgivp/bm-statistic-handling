@@ -8,13 +8,13 @@ export const usersReducer = (state = initialUsersState, action) => {
             return {...state, loading: true, error: null};
         }
         case FETCH_USERS_ERROR: {
-            return {...state, loading: false, error: action.payload};
+            return {...state, loading: false, error: action.payload.error};
         }
         case FETCH_USERS_SUCCESS: {
             return {
                 ...state,
                 loading: false,
-                error: false,
+                error: null,
                 data: action.payload.data,
                 total: action.payload.total,
                 minDate: action.payload.minDate,

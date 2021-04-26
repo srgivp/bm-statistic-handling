@@ -2,7 +2,7 @@ import React from "react";
 
 export const limit = 25;
 export const resultsToDisplay = (state, location, history) => {
-    return state.users.data.map((item, index) => {
+    return state.users.data ? state.users.data.map((item, index) => {
         return <tr key={index} onClick={() => {
             history.push(`${location.pathname}/user/${item.id}`)
         }}>
@@ -15,7 +15,7 @@ export const resultsToDisplay = (state, location, history) => {
             <td>{item.total_clicks}</td>
             <td>{item.total_page_views}</td>
         </tr>
-    })
+    }) : null
 }
 
 export const msInDay = 86400000;

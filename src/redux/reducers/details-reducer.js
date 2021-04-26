@@ -24,12 +24,12 @@ export const detailsReducer = (state = initialDetailsState, action) => {
             return {...state, loading: true, error: null};
         }
         case FETCH_DETAILS_ERROR: {
-            return {...state, loading: false, error: action.payload};
+            return {...state, loading: false, error: action.payload.error};
         }
         case FETCH_DETAILS_SUCCESS: {
             const {data, from, to} = action.payload;
             const correctedData = correctStatisticBuilder(data, from, to);
-            return {...state, loading: false, error: false, data, from, to, correctedData};
+            return {...state, loading: false, error: null, data, from, to, correctedData};
         }
         case CHANGE_FROM: {
             const {from} = action.payload;

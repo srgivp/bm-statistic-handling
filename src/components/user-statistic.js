@@ -58,6 +58,7 @@ const UserStatistic = () => {
                                 render={() =>
                                     <DatePicker name='from' minDate={new Date(minDate)} maxDate={new Date(maxDate)}
                                                 selected={from ? new Date(from) : null}
+                                                dateFormat='yyyy MMMM dd'
                                                 withPortal={window.matchMedia("(max-width: 700px)").matches}
                                                 onChange={(date) => {
                                                     setValue('from', date);
@@ -79,6 +80,7 @@ const UserStatistic = () => {
                                 render={() =>
                                     <DatePicker name='to' minDate={new Date(from)} maxDate={new Date(maxDate)}
                                                 selected={to ? new Date(to) : null}
+                                                dateFormat='yyyy MMMM dd'
                                                 withPortal={window.matchMedia("(max-width: 700px)").matches}
                                                 onChange={(date) => {
                                                     setValue('to', date);

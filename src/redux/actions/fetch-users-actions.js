@@ -12,11 +12,16 @@ export const fetchUsersRequest = (payload) => async (dispatch) => {
             response = await response.json();
             dispatch(fetchUsersSuccess(response));
         } else {
-            response = response.json();
-            dispatch(fetchUsersError(response.error));
+            const error = await response.json();
+            if (!error.message){
+                error.message = 'Internal server error';
+            }
+            dispatch(fetchUsersError({error}))
         }
     } catch (err) {
-        dispatch(fetchUsersError(err))
+        const {message, stack} = err;
+        const error = {message, stack};
+        dispatch(fetchUsersError({error: error}))
     }
 
 }

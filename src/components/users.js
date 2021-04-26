@@ -57,8 +57,8 @@ const Users = () => {
                 {resultsToDisplay(state, location, history)}
                 </tbody>
             </table>
-            <Pages/>
         </main>
+        <Pages/>
         <footer>
             <div className='flex-container'>
                 <div>AppCo</div>

@@ -13,12 +13,11 @@ const ErrorHandler = () => {
     };
     useEffect(() => {
         if (stateError) {
-            addToast(stateError.message, {
+            addToast(`Error: ${stateError.message}`, {
                 appearance: 'error',
                 onDismiss: id => cleanError()
             })
         }
-
     }, [stateError])
 
     return (<div id='error-handler'> </div>)

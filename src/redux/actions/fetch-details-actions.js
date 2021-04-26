@@ -6,6 +6,7 @@ import {
     CHANGE_TO, SET_NAME
 } from "./action-types";
 import {actionSamplePayload} from "./action-samples";
+import {fetchUsersError} from "./fetch-users-actions";
 
 export const fetchDetailsSuccess = actionSamplePayload(FETCH_DETAILS_SUCCESS);
 export const fetchDetailsError = actionSamplePayload(FETCH_DETAILS_ERROR);
@@ -20,11 +21,16 @@ export const fetchDetailsRequest = (payload) => async (dispatch) => {
             response.to = to;
             dispatch(fetchDetailsSuccess(response));
         } else {
-            response = response.json();
-            dispatch(fetchDetailsError(response.error));
+            const error = await response.json();
+            if (!error.message){
+                error.message = 'Internal server error';
+            }
+            dispatch(fetchDetailsError({error}))
         }
     } catch (err) {
-        dispatch(fetchDetailsError(err))
+        const {message, stack} = err;
+        const error = {message, stack};
+        dispatch(fetchDetailsError({error}))
     }
 
 }
