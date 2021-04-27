@@ -15,7 +15,7 @@ const Homepage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await fetch('http://localhost:8080/');
+        let response = await fetch('/');
         if (!response.ok) {
           const error = await response.json();
           error.message = 'Internal server error';

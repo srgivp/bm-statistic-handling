@@ -1,6 +1,5 @@
 {
   "main": "server.js",
-  "proxy": "http://localhost:8080",
   "scripts": {
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"pnpm server\" \"pnpm start\"",

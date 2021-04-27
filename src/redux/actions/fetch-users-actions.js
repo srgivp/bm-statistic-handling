@@ -7,7 +7,7 @@ export const fetchUsersRequest = payload => async dispatch => {
   dispatch({ type: FETCH_USERS_REQUEST });
   const { limit, page } = payload;
   try {
-    let response = await fetch(`http://localhost:8080/users/${page}?limit=${limit}`);
+    let response = await fetch(`/users/${page}?limit=${limit}`);
     if (response.ok) {
       response = await response.json();
       dispatch(fetchUsersSuccess(response));
