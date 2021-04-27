@@ -6,7 +6,6 @@ import {
     CHANGE_TO, SET_NAME
 } from "./action-types";
 import {actionSamplePayload} from "./action-samples";
-import {fetchUsersError} from "./fetch-users-actions";
 
 export const fetchDetailsSuccess = actionSamplePayload(FETCH_DETAILS_SUCCESS);
 export const fetchDetailsError = actionSamplePayload(FETCH_DETAILS_ERROR);

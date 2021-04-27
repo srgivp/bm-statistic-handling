@@ -16,10 +16,7 @@ const Homepage = () => {
         const fetchData = async () => {
             try {
                 let response = await fetch('http://localhost:8080/');
-                if (response.ok) {
-                    const {message} = await response.json();
-                    console.log(message);
-                } else {
+                if (!response.ok) {
                     const error = await response.json();
                     error.message = 'Internal server error';
                     dispatch(serverErrorAction({error}));

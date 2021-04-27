@@ -15,7 +15,7 @@ const ErrorHandler = () => {
         if (stateError) {
             addToast(`Error: ${stateError.message}`, {
                 appearance: 'error',
-                onDismiss: id => cleanError()
+                onDismiss: () => cleanError()
             })
         }
     }, [stateError])

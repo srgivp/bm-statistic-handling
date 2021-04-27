@@ -7,6 +7,7 @@ import Pages from "./pagination";
 import NavBar from "./nav-bar";
 import './components-styles/styles-users.scss';
 import './components-styles/common-components-styles.scss';
+import Spinner from "./spinner";
 
 const Users = () => {
     const state = useSelector(state => state);
@@ -21,44 +22,47 @@ const Users = () => {
 
     return <div id='users' className='flex-container'>
         <header className='flex-container'>AppCo</header>
-        <main>
-            <NavBar/>
-            <h3 className='flex-container'>Users statistics</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>
-                        <h3>Id</h3>
-                    </th>
-                    <th>
-                        <h3>First name</h3>
-                    </th>
-                    <th>
-                        <h3>Last name</h3>
-                    </th>
-                    <th>
-                        <h3>Email</h3>
-                    </th>
-                    <th>
-                        <h3>Gender</h3>
-                    </th>
-                    <th>
-                        <h3>Ip address</h3>
-                    </th>
-                    <th>
-                        <h3>Total clicks</h3>
-                    </th>
-                    <th>
-                        <h3>Total page views</h3>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {resultsToDisplay(state, location, history)}
-                </tbody>
-            </table>
-        </main>
-        <Pages/>
+        {state.users.loading ? <Spinner/> :
+            <>
+                <main>
+                    <NavBar/>
+                    <h3 className='flex-container'>Users statistics</h3>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>
+                                <h3>Id</h3>
+                            </th>
+                            <th>
+                                <h3>First name</h3>
+                            </th>
+                            <th>
+                                <h3>Last name</h3>
+                            </th>
+                            <th>
+                                <h3>Email</h3>
+                            </th>
+                            <th>
+                                <h3>Gender</h3>
+                            </th>
+                            <th>
+                                <h3>Ip address</h3>
+                            </th>
+                            <th>
+                                <h3>Total clicks</h3>
+                            </th>
+                            <th>
+                                <h3>Total page views</h3>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {resultsToDisplay(state, location, history)}
+                        </tbody>
+                    </table>
+                </main>
+                <Pages/>
+            </>}
         <footer>
             <div className='flex-container'>
                 <div>AppCo</div>

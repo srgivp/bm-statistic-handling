@@ -12,6 +12,7 @@ import NavBar from "./nav-bar";
 import './components-styles/common-components-styles.scss';
 import './components-styles/styles-details.scss';
 import {fetchUsersRequest} from "../redux/actions/fetch-users-actions";
+import Spinner from "./spinner";
 
 const UserStatistic = () => {
     const state = useSelector(state => state);
@@ -39,7 +40,7 @@ const UserStatistic = () => {
 
     return <div id='details'>
         <header className='flex-container'>AppCo</header>
-        <main>
+        { state.details.loading ? <Spinner /> : <main>
             <NavBar/>
             <div>
                 <h3>{state.details.first_name} {state.details.last_name}</h3>
@@ -105,7 +106,8 @@ const UserStatistic = () => {
                 Views
             </div>
             {correctedData ? <LineChart values="page_views"/> : null}
-        </main>
+        </main> }
+
         <footer>
             <div className='flex-container'>
                 <div>AppCo</div>
