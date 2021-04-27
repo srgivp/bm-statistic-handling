@@ -15,13 +15,6 @@ app.get('/', () => {
 });
 
 app.get('/users/:page', (req, res) => {
-  // let limit;
-  // //to solve the issue with reloading on heroku
-  // if (!req.query.limit) {
-  //   limit = 25
-  // } else {
-  //   limit = req.query.limit;
-  // }
   if (!req.query.limit){
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   } else {
@@ -110,19 +103,6 @@ app.get('/users/:page/user/:id', (req, res) => {
   }
   let startDate;
   let finishDate;
-  // if (!req.query.from || !req.query.to) {
-  //   db.get('SELECT min(date) FROM users_statistic', [], (err, row) => {
-  //     if (err) {
-  //       throw err;
-  //     } else {
-  //       startDate = row['min(date)'];
-  //       const msInDay = 86400000;
-  //       finishDate = Date.parse(startDate) + 6 * msInDay;
-  //       finishDate = new Date(finishDate).toISOString().slice(0, 10);
-  //       selectAndSendStats(startDate, finishDate);
-  //     }
-  //   });
-  // }
   if (!req.query.from || !req.query.to) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   } else {

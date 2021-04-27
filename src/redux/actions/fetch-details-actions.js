@@ -17,8 +17,6 @@ export const fetchDetailsRequest = payload => async dispatch => {
     let response = await fetch(`/users/${page}/user/${id}?from=${from}&to=${to}`);
     if (response.ok) {
       response = await response.json();
-      // response.from = from;
-      // response.to = to;
       dispatch(fetchDetailsSuccess(response));
     } else {
       const error = await response.json();
