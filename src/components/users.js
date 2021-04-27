@@ -23,10 +23,7 @@ const Users = () => {
   return (
     <div id="users" className="flex-container">
       <header className="flex-container">AppCo</header>
-      {state.users.loading ? (
-        <Spinner />
-      ) : (
-        <>
+      {state.users.loading ? <Spinner /> : null}
           <main>
             <NavBar />
             <h3 className="flex-container">Users statistics</h3>
@@ -62,9 +59,9 @@ const Users = () => {
               <tbody>{resultsToDisplay(state, location, history)}</tbody>
             </table>
           </main>
-          <Pages />
-        </>
-      )}
+          {/*// )}*/}
+      <Pages />
+      {/*{state.users.loading ? <Pages style={"z-index: -1"} /> : <Pages />}*/}
       <footer>
         <div className="flex-container">
           <div>AppCo</div>
