@@ -8,14 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 const port = process.env.PORT || 8080;
-app.get('/', (req, res) => {
+app.get('/', () => {
     const db = new sqlite3.Database('./database/customers.db');
-    try {
         createPopulateTable(db, 'users', './database/users.json');
         createPopulateTable(db, 'users_statistic', './database/users_statistic.json');
-    } catch (err) {
-        throw err;
-    }
 });
 
 app.get('/users/:page', (req, res) => {
