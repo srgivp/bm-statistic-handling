@@ -14,7 +14,7 @@ app.get('/', () => {
   createPopulateTable(db, 'users_statistic', './database/users_statistic.json');
 });
 
-app.get('/users/:page', (req, res) => {
+app.get('/users/:page', (req, res, next) => {
   const limit = req.query.limit;
   const page = req.params.page;
   const offset = page * limit;
@@ -77,14 +77,16 @@ app.get('/users/:page', (req, res) => {
       }
     });
   }
-}
+} else {
+    next();
+  }
 });
 
-app.get('/users/:page/user/:id', (req, res) => {
-  const startDate = `'${req.query.from}'`;
-  const finishDate = `'${req.query.to}'`;
-  const userId = req.params.id;
-  if (startDate && finishDate) {
+app.get('/users/:page/user/:id', (req, res, next) => {
+  if (req.query.from && req.query.to) {
+    const startDate = `'${req.query.from}'`;
+    const finishDate = `'${req.query.to}'`;
+    const userId = req.params.id;
     if (!/\d{4}-\d{2}-\d{2}/.test(startDate) || !/\d{4}-\d{2}-\d{2}/.test(finishDate)) {
       res.status(412).json({ message: 'Dates "from" and "to" should be sent to the server in "yyyy-mm-dd" format' });
     } else if (isNaN(parseInt(userId, 10))) {
@@ -100,6 +102,8 @@ app.get('/users/:page/user/:id', (req, res) => {
         }
       });
     }
+  } else {
+    next();
   }
 });
 
