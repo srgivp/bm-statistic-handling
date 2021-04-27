@@ -1,7 +1,12 @@
 {
   "parserOptions": {
     "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 12,
+    "ecmaFeatures": {
+      "globalReturn": true,
+      "experimentalObjectRestSpread": true
+    }
   },
   "plugins": [
     "import",
