@@ -5,7 +5,7 @@ const cors = require('cors');
 const createPopulateTable = require('./utils/create-populate-table');
 
 const app = express();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8082;
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/', () => {
@@ -14,11 +14,16 @@ app.get('/', () => {
   createPopulateTable(db, 'users_statistic', './database/users_statistic.json');
 });
 
-app.get('/users/:page', (req, res, next) => {
-  const limit = req.query.limit;
+app.get('/users/:page', (req, res) => {
+  let limit;
+  //to solve the issue with reloading on heroku
+  if (!req.query.limit) {
+    limit = 25
+  } else {
+    limit = req.query.limit;
+  }
   const page = req.params.page;
   const offset = page * limit;
-  if (limit) {
   if (isNaN(parseInt(limit, 10))) {
     res.status(412).json({message: 'The "limit" query in URI should be an Integer type'});
   } else if (isNaN(parseInt(page, 10))) {
@@ -77,33 +82,45 @@ app.get('/users/:page', (req, res, next) => {
       }
     });
   }
-} else {
-    next();
-  }
 });
 
-app.get('/users/:page/user/:id', (req, res, next) => {
-  if (req.query.from && req.query.to) {
-    const startDate = `'${req.query.from}'`;
-    const finishDate = `'${req.query.to}'`;
+app.get('/users/:page/user/:id', (req, res) => {
+  const db = new sqlite3.Database('./database/customers.db');
+  const selectAndSendStats = (startDate, finishDate) => {
     const userId = req.params.id;
     if (!/\d{4}-\d{2}-\d{2}/.test(startDate) || !/\d{4}-\d{2}-\d{2}/.test(finishDate)) {
       res.status(412).json({ message: 'Dates "from" and "to" should be sent to the server in "yyyy-mm-dd" format' });
     } else if (isNaN(parseInt(userId, 10))) {
       res.status(412).json({ message: 'The "id" parameter in URI should be an Integer type' });
     } else {
-      const db = new sqlite3.Database('./database/customers.db');
-      const sqlStmnt = `SELECT clicks, page_views, date FROM users_statistic WHERE user_id = ${userId} and date BETWEEN ${startDate} AND ${finishDate}`;
+      const sqlStmnt = `SELECT clicks, page_views, date FROM users_statistic WHERE user_id = ${userId} and date BETWEEN '${startDate}' AND '${finishDate}'`;
       db.all(sqlStmnt, [], (err, rows) => {
         if (err) {
           throw err;
         } else {
-          res.json({ data: rows });
+          res.json({ data: rows, from: startDate, to: finishDate });
         }
       });
     }
+  }
+  let startDate;
+  let finishDate;
+  if (!req.query.from || !req.query.to) {
+    db.get('SELECT min(date) FROM users_statistic', [], (err, row) => {
+      if (err) {
+        throw err;
+      } else {
+        startDate = row['min(date)'];
+        const msInDay = 86400000;
+        finishDate = Date.parse(startDate) + 6 * msInDay;
+        finishDate = new Date(finishDate).toISOString().slice(0, 10);
+        selectAndSendStats(startDate, finishDate);
+      }
+    });
   } else {
-    next();
+    startDate = `${req.query.from}`;
+    finishDate = `${req.query.to}`;
+    selectAndSendStats(startDate, finishDate);
   }
 });
 
