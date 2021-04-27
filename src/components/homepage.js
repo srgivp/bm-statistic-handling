@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './components-styles/styles-homepage.scss';
-import mobile from '../images/mobile.svg';
+import mobile from '../images/mobile.png';
 import ellipse from '../images/ellipse.svg';
 import design from '../images/design.svg';
 import secure from '../images/secure.svg';

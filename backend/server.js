@@ -15,72 +15,77 @@ app.get('/', () => {
 });
 
 app.get('/users/:page', (req, res) => {
-  let limit;
-  //to solve the issue with reloading on heroku
-  if (!req.query.limit) {
-    limit = 25
+  // let limit;
+  // //to solve the issue with reloading on heroku
+  // if (!req.query.limit) {
+  //   limit = 25
+  // } else {
+  //   limit = req.query.limit;
+  // }
+  if (!req.query.limit){
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   } else {
-    limit = req.query.limit;
-  }
-  const page = req.params.page;
-  const offset = page * limit;
-  if (isNaN(parseInt(limit, 10))) {
-    res.status(412).json({message: 'The "limit" query in URI should be an Integer type'});
-  } else if (isNaN(parseInt(page, 10))) {
-    res.status(412).json({message: 'The "page" parameter in URI should be an Integer type'});
-  } else {
-    const db = new sqlite3.Database('./database/customers.db');
-    const sqlUsers = `SELECT * FROM users LIMIT ?,?`;
-    db.all(sqlUsers, [offset, limit], (err, rows) => {
-      if (err) {
-        throw err;
-      } else {
-        const lastIndex = rows.length - 1;
-        let usersData = JSON.parse(JSON.stringify(rows));
-        usersData.map((item, index) => {
-          db.all(`SELECT page_views, clicks FROM users_statistic WHERE user_id = ${item.id}`, [], (err, rows) => {
-            if (err) {
-              throw err;
-            } else {
-              let totalData = rows.reduce(
-                  (acc, val) => {
-                    acc.total_clicks += val.clicks;
-                    acc.total_page_views += val.page_views;
-                    return acc;
-                  },
-                  {total_clicks: 0, total_page_views: 0}
-              );
-              item.total_clicks = totalData.total_clicks;
-              item.total_page_views = totalData.total_page_views;
-              if (index === lastIndex) {
-                db.get('SELECT COUNT(*) as count FROM users', [], (err, row) => {
-                  if (err) {
-                    throw err;
-                  } else {
-                    let total = row.count;
-                    db.get('SELECT min(date) FROM users_statistic', [], (err, row) => {
-                      if (err) {
-                        throw err;
-                      } else {
-                        const minDate = row['min(date)'];
-                        db.get('SELECT max(date) FROM users_statistic', [], (err, row) => {
-                          if (err) {
-                            throw err;
-                          } else {
-                            const maxDate = row['max(date)'];
-                            res.json({data: usersData, total, minDate, maxDate});
-                          }
-                        });
-                      }
-                    });
-                  }
-                });
+    const limit = req.query.limit;
+    const page = req.params.page;
+    const offset = page * limit;
+    if (isNaN(parseInt(limit, 10))) {
+      res.status(412).json({message: 'The "limit" query in URI should be an Integer type'});
+    } else if (isNaN(parseInt(page, 10))) {
+      res.status(412).json({message: 'The "page" parameter in URI should be an Integer type'});
+    } else {
+      const db = new sqlite3.Database('./database/customers.db');
+      const sqlUsers = `SELECT * FROM users LIMIT ?,?`;
+      db.all(sqlUsers, [offset, limit], (err, rows) => {
+        if (err) {
+          throw err;
+        } else {
+          const lastIndex = rows.length - 1;
+          let usersData = JSON.parse(JSON.stringify(rows));
+          usersData.map((item, index) => {
+            db.all(`SELECT page_views, clicks FROM users_statistic WHERE user_id = ${item.id}`, [], (err, rows) => {
+              if (err) {
+                throw err;
+              } else {
+                let totalData = rows.reduce(
+                    (acc, val) => {
+                      acc.total_clicks += val.clicks;
+                      acc.total_page_views += val.page_views;
+                      return acc;
+                    },
+                    {total_clicks: 0, total_page_views: 0}
+                );
+                item.total_clicks = totalData.total_clicks;
+                item.total_page_views = totalData.total_page_views;
+                if (index === lastIndex) {
+                  db.get('SELECT COUNT(*) as count FROM users', [], (err, row) => {
+                    if (err) {
+                      throw err;
+                    } else {
+                      let total = row.count;
+                      db.get('SELECT min(date) FROM users_statistic', [], (err, row) => {
+                        if (err) {
+                          throw err;
+                        } else {
+                          const minDate = row['min(date)'];
+                          db.get('SELECT max(date) FROM users_statistic', [], (err, row) => {
+                            if (err) {
+                              throw err;
+                            } else {
+                              const maxDate = row['max(date)'];
+                              res.json({data: usersData, total, minDate, maxDate});
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
               }
-            }
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    }
   }
 });
 
@@ -105,18 +110,21 @@ app.get('/users/:page/user/:id', (req, res) => {
   }
   let startDate;
   let finishDate;
+  // if (!req.query.from || !req.query.to) {
+  //   db.get('SELECT min(date) FROM users_statistic', [], (err, row) => {
+  //     if (err) {
+  //       throw err;
+  //     } else {
+  //       startDate = row['min(date)'];
+  //       const msInDay = 86400000;
+  //       finishDate = Date.parse(startDate) + 6 * msInDay;
+  //       finishDate = new Date(finishDate).toISOString().slice(0, 10);
+  //       selectAndSendStats(startDate, finishDate);
+  //     }
+  //   });
+  // }
   if (!req.query.from || !req.query.to) {
-    db.get('SELECT min(date) FROM users_statistic', [], (err, row) => {
-      if (err) {
-        throw err;
-      } else {
-        startDate = row['min(date)'];
-        const msInDay = 86400000;
-        finishDate = Date.parse(startDate) + 6 * msInDay;
-        finishDate = new Date(finishDate).toISOString().slice(0, 10);
-        selectAndSendStats(startDate, finishDate);
-      }
-    });
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   } else {
     startDate = `${req.query.from}`;
     finishDate = `${req.query.to}`;
